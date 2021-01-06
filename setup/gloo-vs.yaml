@@ -1,0 +1,17 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: default
+  namespace: gloo-system
+spec:
+  virtualHost:
+    domains:
+      - '*'
+    routes:
+      - matchers:
+          - exact: /
+        routeAction:
+          single:
+            upstream:
+              name: default-awang-apiserver-console-1234
+              namespace: gloo-system

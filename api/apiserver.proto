@@ -1,0 +1,22 @@
+syntax = "proto3";
+package awang.solo.io;
+
+option (extproto.equal_all) = true;
+import "extproto/ext.proto";
+option (extproto.hash_all) = true;
+
+option go_package = "github.com/ashleywang1/capture-the-flag-apiserver/api";
+
+message Flag {
+    string flag = 1;
+}
+
+message CaptureTheFlagRequest {}
+
+message CaptureTheFlagResponse {
+    Flag flag = 1;
+}
+
+service CaptureTheFlagApi {
+    rpc CaptureTheFlag (CaptureTheFlagRequest) returns (CaptureTheFlagResponse) {}
+}
