@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/ashleywang1/capture-the-flag-apiserver/api"
 	"github.com/rotisserie/eris"
-	"github.com/solo-io/go-utils/contextutils"
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/stats/view"
 	"golang.org/x/sync/errgroup"
@@ -46,7 +45,7 @@ func (g *grpcServer) Run(ctx context.Context) error {
 	if err != nil {
 		return eris.Wrapf(err, "failed to setup grpc listener")
 	}
-	contextutils.LoggerFrom(ctx).Infof("Set up grpc listener at port %d", 1234)
+	fmt.Printf("Set up grpc listener at port %d", 1234)
 	eg.Go(func() error {
 		return g.server.Serve(grpcListener)
 	})

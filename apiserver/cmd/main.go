@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"github.com/ashleywang1/capture-the-flag-apiserver/apiserver/server"
 	"github.com/ashleywang1/capture-the-flag-apiserver/apiserver/server/handler"
-	"github.com/solo-io/go-utils/contextutils"
 )
 
 func main() {
-	ctx := contextutils.WithLogger(context.Background(), "awang-apiserver")
+	ctx := context.Background()
 
 	apiServer := server.NewGrpcServer(ctx, handler.NewHandler())
 
