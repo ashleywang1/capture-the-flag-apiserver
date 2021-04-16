@@ -12,6 +12,11 @@ $(OUTPUT_DIR)/apiserver-linux-amd64: $(APISERVER_SOURCES)
 apiserver-docker: $(OUTPUT_DIR)/apiserver-linux-amd64
 	docker build -t ashwang168/capture-the-flag-apiserver:v1 $(OUTPUT_DIR) -f $(ROOTDIR)/apiserver/cmd/Dockerfile;
 
+# Run the apiserver on localhost:1234
+.PHONY: run-apiserver
+run-apiserver:
+	go run apiserver/cmd/main.go
+
 .PHONY: release
 release: apiserver-docker
 	docker push ashwang168/capture-the-flag-apiserver:v1
