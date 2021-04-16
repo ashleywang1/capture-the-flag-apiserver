@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+
 	"github.com/ashleywang1/capture-the-flag-apiserver/apiserver/server"
 	"github.com/ashleywang1/capture-the-flag-apiserver/apiserver/server/handler"
 )

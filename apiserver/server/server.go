@@ -3,13 +3,15 @@ package server
 import (
 	"context"
 	"fmt"
+	"net"
+
 	"github.com/ashleywang1/capture-the-flag-apiserver/api"
 	"github.com/rotisserie/eris"
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/stats/view"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
-	"net"
+	"google.golang.org/grpc/reflection"
 )
 
 func init() {
@@ -22,19 +24,20 @@ type GrpcServer interface {
 }
 
 type grpcServer struct {
-	server        *grpc.Server
+	server *grpc.Server
 }
 
 func NewGrpcServer(
 	ctx context.Context,
 	captureTheFlagService api.CaptureTheFlagApiServer,
 ) GrpcServer {
-	fmt.Printf("Started up GRPC Server")
+	fmt.Printf("Started up GRPC Server\n")
 	server := grpc.NewServer()
 	api.RegisterCaptureTheFlagApiServer(server, captureTheFlagService)
+	reflection.Register(server)
 
 	return &grpcServer{
-		server:        server,
+		server: server,
 	}
 }
 
